@@ -3,7 +3,7 @@ const entregaRoutes = express.Router();
 
 const entregaController = require("../controller/entregaController");
 
-entregaRoutes.post("/entregas/adicionar", entregaController.adcionarEntrega);
+entregaRoutes.post("/adicionar", entregaController.adcionarEntrega);
 
 
 module.exports = {entregaRoutes}

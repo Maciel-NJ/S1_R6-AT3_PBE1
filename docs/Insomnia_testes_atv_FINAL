@@ -176,7 +176,7 @@ collection:
         meta:
           id: req_a2d8d8cc8246441799bafc430e2e467c
           created: 1763983491085
-          modified: 1764588635697
+          modified: 1764607214375
           isPrivate: false
           description: ""
           sortKey: -1763983491085
@@ -185,8 +185,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"id_cliente": 4,
-            	"tipo_entrega": "normal",
+            	"id_cliente": 6,
+            	"tipo_entrega": "urgente",
             	"valor_base_kg": 10.00,
             	"valor_base_km": 5.00,
             	"peso_kg": 3.00,
@@ -325,11 +325,11 @@ collection:
       description: ""
     children:
       - url: localhost:8080/calcular
-        name: calcular entregas
+        name: calcular/salvar entregas
         meta:
           id: req_e92ca8d374cc4511bf78cd5e5772454d
           created: 1764586821790
-          modified: 1764587264607
+          modified: 1764607278168
           isPrivate: false
           description: ""
           sortKey: -1764586821790
@@ -339,7 +339,7 @@ collection:
           text: |-
             {
 
-            "pedidoId": 3
+            "pedidoId": 15
 
             }
         headers:

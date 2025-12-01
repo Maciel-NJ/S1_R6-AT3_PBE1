@@ -61,7 +61,7 @@ const entregaModel = {
   /**
    * @description Insere um novo registro de entrega no banco de dados.
    * 
-   * @param {number} dados - Objeto contendo os valores da entrega:
+   * @param {*} dados Objeto contendo os valores da entrega:
  *    {
  *      valorDistancia: number,
  *      valorPeso: number,

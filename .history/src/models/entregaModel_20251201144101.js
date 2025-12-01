@@ -58,22 +58,7 @@ const entregaModel = {
   },
   
 
-  /**
-   * @description Insere um novo registro de entrega no banco de dados.
-   * 
-   * @param {number} dados - Objeto contendo os valores da entrega:
- *    {
- *      valorDistancia: number,
- *      valorPeso: number,
- *      acrescimo: number,
- *      desconto: number,
- *      taxaExtra: number,
- *      valorFinal: number
-   * 
-   * @route POST /entrega
-   * 
-   * @returns {Promise<Object>} Resultado da inserção no banco.
-   */
+  
   inserirEntrega: async (dados) => {
     const sql = `
     INSERT INTO entregas (

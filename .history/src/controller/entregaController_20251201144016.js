@@ -53,12 +53,12 @@ const { pedidoModel } = require("../models/pedidoModel");
 
 
     /**
- * @description Controlador responsável por calcular e adicionar ao bnco de dados valor final de uma entrega
+ * @description Controlador responsável por calcular o valor final de uma entrega
  * com base no ID do pedido enviado pelo cliente.
  *
- * @param {number} req.body.pedidoId - ID do pedido cuja entrega será calculada e adcionada ao banco de dados.
+ * @param {number} req.body.pedidoId - ID do pedido cuja entrega será calculada.
  *
- * @route POST /
+ * @route POST /calcularEntrega e 
  *
  * @returns {JSON} Retorna mensagem de sucesso, os valores calculados,
  *                 e o ID do pedido; ou uma mensagem de erro.
