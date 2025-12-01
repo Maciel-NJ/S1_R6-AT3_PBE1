@@ -41,19 +41,21 @@ const clienteModel = {
     },
 
      /**
- * @description Verifica se um email já está cadastrado no sistema.
+ * @description Verifica se um CPF já está cadastrado no sistema.
  *
- * @param {string} pEmail - Email a ser verificado.
+ * @param {string} pCpf - CPF a ser verificado.
  * 
- * @route POST /clientes/validar-email
+ * @route POST /clientes/validar-cpf
  *
  * @returns {Promise<Object|null>} Dados do cliente, caso exista.
- */      validacaoEmail: async (pEmail) => {
+ */  
+    validacaoEmail: async (pEmail) => {
         const sql = 'SELECT * FROM clientes WHERE email = ?;'
         const values = [pEmail];
         const [rows] = await pool.query(sql, values);
         return rows;
-    },
+    }
+
 
 
     /**

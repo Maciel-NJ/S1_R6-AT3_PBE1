@@ -40,20 +40,8 @@ const clienteModel = {
         return rows;
     },
 
-     /**
- * @description Verifica se um email já está cadastrado no sistema.
- *
- * @param {string} pEmail - Email a ser verificado.
- * 
- * @route POST /clientes/validar-email
- *
- * @returns {Promise<Object|null>} Dados do cliente, caso exista.
- */      validacaoEmail: async (pEmail) => {
-        const sql = 'SELECT * FROM clientes WHERE email = ?;'
-        const values = [pEmail];
-        const [rows] = await pool.query(sql, values);
-        return rows;
-    },
+    validacaoEmail: async (pEmail) => {
+
 
 
     /**

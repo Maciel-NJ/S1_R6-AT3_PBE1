@@ -56,6 +56,7 @@ const clienteModel = {
     },
 
 
+
     /**
  * @description Busca todos os clientes cadastrados.
  * 

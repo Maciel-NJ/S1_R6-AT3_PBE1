@@ -20,7 +20,7 @@ collection:
         meta:
           id: req_029adaa09437418695e8a7d99d0f83f7
           created: 1763400798997
-          modified: 1764588836499
+          modified: 1764613868186
           isPrivate: false
           description: ""
           sortKey: -1763400798997
@@ -29,10 +29,10 @@ collection:
           mimeType: application/json
           text: |
             {
-              "nomeCompleto": "Maciel Samuel",
-              "cpf": "41881734809",
-              "telefone": "199981229840",
-              "email": "samuel9@outlook.com",
+              "nomeCompleto": "Ronaldo",
+              "cpf": "41833305410",
+              "telefone": "199981226457",
+              "email": "cr10o@outlook.com",
               "endereco": "Rua Mari Mendara, 13175615"
             }
         headers:
@@ -104,12 +104,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: localhost:8080/clientes/3
+      - url: localhost:8080/clientes/4
         name: atualizar cliente
         meta:
           id: req_670c33f8efd444bbbb483234971b79bd
           created: 1764007770824
-          modified: 1764009488066
+          modified: 1764613651519
           isPrivate: false
           description: ""
           sortKey: -1764007770824
@@ -140,12 +140,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: localhost:8080/clientes/3
+      - url: localhost:8080/clientes/4
         name: excluir clientes
         meta:
           id: req_efeeed3e07f34544b2a39df9ccdc9b18
           created: 1764596785341
-          modified: 1764596835934
+          modified: 1764613967291
           isPrivate: false
           description: ""
           sortKey: -1764596785341
@@ -176,21 +176,21 @@ collection:
         meta:
           id: req_a2d8d8cc8246441799bafc430e2e467c
           created: 1763983491085
-          modified: 1764607214375
+          modified: 1764612831494
           isPrivate: false
           description: ""
-          sortKey: -1763983491085
+          sortKey: -1764298820943
         method: POST
         body:
           mimeType: application/json
           text: |-
             {
-            	"id_cliente": 6,
-            	"tipo_entrega": "urgente",
+            	"id_cliente": 9,
+            	"tipo_entrega": "normal",
             	"valor_base_kg": 10.00,
-            	"valor_base_km": 5.00,
-            	"peso_kg": 3.00,
-            	"distancia_km": 2,
+            	"valor_base_km": 10.00,
+            	"peso_kg": 10.00,
+            	"distancia_km": 10,
             	"data_pedido": "2025-11-28",	
             	"status_entrega": "pendente"
             }
@@ -293,12 +293,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: localhost:8080/pedidos/3
+      - url: localhost:8080/pedidos/15
         name: excluir pedidos
         meta:
           id: req_a10eb15a36b04f33a1227a072229690c
           created: 1764595333496
-          modified: 1764595351710
+          modified: 1764613219013
           isPrivate: false
           description: ""
           sortKey: -1764595333496
@@ -324,12 +324,12 @@ collection:
       sortKey: -1764585770339
       description: ""
     children:
-      - url: localhost:8080/calcular
+      - url: localhost:8080/entregas/adicionar
         name: calcular/salvar entregas
         meta:
           id: req_e92ca8d374cc4511bf78cd5e5772454d
           created: 1764586821790
-          modified: 1764607278168
+          modified: 1764612243565
           isPrivate: false
           description: ""
           sortKey: -1764586821790
@@ -339,7 +339,8 @@ collection:
           text: |-
             {
 
-            "pedidoId": 15
+            "pedidoId": 14
+            	
 
             }
         headers:

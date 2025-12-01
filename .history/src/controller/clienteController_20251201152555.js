@@ -23,10 +23,6 @@ const clienteController = {
             if (cpfEmUso.length > 0) {
                 return res.status(409).json({ message: 'Este CPF já está sendo usado por um cliente :/' });
             }
-            const emailEmUso = await clienteModel.validacaoEmail(email);
-            if (emailEmUso.length > 0) {
-                return res.status(409).json({ message: 'Este email já está sendo usado por um cliente :/' });
-            }
 
             const resultado = await clienteModel.criarCadastro(nomeCompleto, cpf, telefone, email, endereco);
 
@@ -119,10 +115,6 @@ const clienteController = {
             }const cpfEmUso = await clienteModel.validacaoCpf(cpf);
             if (cpfEmUso.length > 0) {
                 return res.status(409).json({ message: 'Este CPF já está sendo usado por um cliente :/' });
-            }
-            const emailEmUso = await clienteModel.validacaoEmail(email);
-            if (emailEmUso.length > 0) {
-                return res.status(409).json({ message: 'Este email já está sendo usado por um cliente :/' });
             }
 
             const cadastroAtual = await clienteModel.buscaPeloId(idCliente);

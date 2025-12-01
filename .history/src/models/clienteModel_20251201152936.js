@@ -53,7 +53,8 @@ const clienteModel = {
         const values = [pEmail];
         const [rows] = await pool.query(sql, values);
         return rows;
-    },
+    }
+
 
 
     /**
