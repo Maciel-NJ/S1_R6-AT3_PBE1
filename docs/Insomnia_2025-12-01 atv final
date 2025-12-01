@@ -140,6 +140,29 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: localhost:8080/clientes/3
+        name: excluir clientes
+        meta:
+          id: req_efeeed3e07f34544b2a39df9ccdc9b18
+          created: 1764596785341
+          modified: 1764596835934
+          isPrivate: false
+          description: ""
+          sortKey: -1764596785341
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.1.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - name: pedidos
     meta:
       id: fld_1ec743ed6a6a40f4b01ffba1b24c45d8

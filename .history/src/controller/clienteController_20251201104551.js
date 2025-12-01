@@ -163,17 +163,17 @@ const clienteController = {
 
             const clienteSelecionado = await clienteModel.buscaPeloId(id);
 
-            if (clienteSelecionado.length === 0) {
-                throw new Error('Não conseguimos localizar o cliente para exclusão');
+            if (pedidoSelecionado.length === 0) {
+                throw new Error('Não conseguimos localizar o pedido para exclusão');
             }
             else {
 
-                const resultado = await clienteModel.deleteCliente(id);
+                const resultado = await pedidoModel.deletePedido(id);
                 if (resultado.affectedRows === 1) {
-                    res.status(200).json({ message: 'Cliente apagado com sucesso!', data: resultado });
+                    res.status(200).json({ message: 'Pedido apagado com sucesso!', data: resultado });
                 }
                 else {
-                    throw new Error('Não foi possível excluir o cliente');
+                    throw new Error('Não foi possível excluir o pedido');
                 }
 
             }

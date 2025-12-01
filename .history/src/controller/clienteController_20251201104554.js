@@ -170,10 +170,10 @@ const clienteController = {
 
                 const resultado = await clienteModel.deleteCliente(id);
                 if (resultado.affectedRows === 1) {
-                    res.status(200).json({ message: 'Cliente apagado com sucesso!', data: resultado });
+                    res.status(200).json({ message: 'Pedido apagado com sucesso!', data: resultado });
                 }
                 else {
-                    throw new Error('Não foi possível excluir o cliente');
+                    throw new Error('Não foi possível excluir o pedido');
                 }
 
             }

@@ -146,34 +146,34 @@ const clienteController = {
 
 
     /**
- * @description Exclui um cliente pelo seu ID.
+ * @description Exclui um pedido pelo seu ID.
  * 
- * @param {number} - ID do cliente a ser excluído.
+ * @param {number} - ID do pedido a ser excluído.
  * 
- * @route DELETE /clientes/:idCliente
+ * @route DELETE /pedidos/:idPedido
  * @returns {JSON} Retorna mensagem de sucesso ou erro.
  */
-    excluirCliente: async (req, res) => {
+    excluirPedido: async (req, res) => {
         try {
-            const id = Number(req.params.idCliente);
+            const id = Number(req.params.idPedido);
 
             if (!id || !Number.isInteger(id)) {
                 return res.status(400).json({ message: 'Forneça um ID válido' });
             }
 
-            const clienteSelecionado = await clienteModel.buscaPeloId(id);
+            const pedidoSelecionado = await pedidoModel.buscarPedidoPeloId(id);
 
-            if (clienteSelecionado.length === 0) {
-                throw new Error('Não conseguimos localizar o cliente para exclusão');
+            if (pedidoSelecionado.length === 0) {
+                throw new Error('Não conseguimos localizar o pedido para exclusão');
             }
             else {
 
-                const resultado = await clienteModel.deleteCliente(id);
+                const resultado = await pedidoModel.deletePedido(id);
                 if (resultado.affectedRows === 1) {
-                    res.status(200).json({ message: 'Cliente apagado com sucesso!', data: resultado });
+                    res.status(200).json({ message: 'Pedido apagado com sucesso!', data: resultado });
                 }
                 else {
-                    throw new Error('Não foi possível excluir o cliente');
+                    throw new Error('Não foi possível excluir o pedido');
                 }
 
             }

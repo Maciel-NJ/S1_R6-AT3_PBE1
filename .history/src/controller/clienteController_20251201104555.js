@@ -173,7 +173,7 @@ const clienteController = {
                     res.status(200).json({ message: 'Cliente apagado com sucesso!', data: resultado });
                 }
                 else {
-                    throw new Error('Não foi possível excluir o cliente');
+                    throw new Error('Não foi possível excluir o pedido');
                 }
 
             }

@@ -101,8 +101,8 @@ const clienteModel = {
  * 
  * @returns {Promise<Object>} Resultado da exclusão.
  */
-     deleteCliente: async (pId)=>{
-const sql = 'DELETE FROM clientes WHERE id_cliente = ?; ' ;
+     deletePedido: async (pId)=>{
+const sql = 'DELETE FROM pedidos WHERE id_pedido = ?; ' ;
 const values = [pId];
 const [rows] = await pool.query(sql, values);
 return rows;

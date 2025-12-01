@@ -93,16 +93,8 @@ const clienteModel = {
 
     },
 
-/**
- * @description Exclui um cliente pelo seu ID.
- * 
- * @param {number} - ID do cliente a ser excluído.
- * @route DELETE /clientes/:idCliente
- * 
- * @returns {Promise<Object>} Resultado da exclusão.
- */
-     deleteCliente: async (pId)=>{
-const sql = 'DELETE FROM clientes WHERE id_cliente = ?; ' ;
+     deletePedido: async (pId)=>{
+const sql = 'DELETE FROM pedidos WHERE id_pedido = ?; ' ;
 const values = [pId];
 const [rows] = await pool.query(sql, values);
 return rows;
