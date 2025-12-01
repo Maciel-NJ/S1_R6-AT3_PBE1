@@ -88,7 +88,7 @@ const entregaModel = {
       dados.desconto,
       dados.taxaExtra,
       dados.valorFinal,
-      dados.statusEntrega,
+      "entregue",
       dados.idPedido
     ];
 
