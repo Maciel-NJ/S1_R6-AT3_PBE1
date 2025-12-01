@@ -64,7 +64,7 @@ const { pedidoModel } = require("../models/pedidoModel");
  *                 e o ID do pedido; ou uma mensagem de erro.
  */ 
 module.exports = {
-   adcionarEntrega: async (req, res) => {
+   calcularEntrega: async (req, res) => {
     try {
       const { pedidoId } = req.body;
 
@@ -76,34 +76,22 @@ module.exports = {
       const valores = calcularValoresEntrega(pedido);
 
       
-       const dadosEntrega = {
-      valorDistancia: valores.valorDistancia,
-      valorPeso: valores.valorPeso,
-      acrescimo: valores.acrescimo,
-      desconto: valores.desconto,
-      taxaExtra: valores.taxaExtra,
-      valorFinal: valores.valorFinal,
-      idPedido: pedidoId
-    };
+      await entregaModel.atualizarEntrega(pedidoId, valores);
 
-    
-    const resultadoInsercao = await entregaModel.inserirEntrega(dadosEntrega);
+      res.json({
+        mensagem: "Entrega calculada com sucesso! :) ",
+        pedidoId,
+        valores
+      });
 
-    
-    await entregaModel.atualizarEntrega(pedidoId, valores);
-
-    return res.json({
-      mensagem: "Entrega calculada e salva com sucesso! :)",
-      pedidoId,
-      valores,
-      entregaInserida: resultadoInsercao
-    });
-
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ erro: "Erro ao calcular a entrega :(" });
-  }
-}
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ erro: "Erro ao calcular a entrega :( " });
+    }
+  },
 
 
+  registrarDadosEntrega: async (req, res) => {
+    try {
+      const { pedidoId } = req.body;
 };

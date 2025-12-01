@@ -86,7 +86,7 @@ module.exports = {
       idPedido: pedidoId
     };
 
-    
+    // Chamada do model
     const resultadoInsercao = await entregaModel.inserirEntrega(dadosEntrega);
 
     

@@ -1,6 +1,6 @@
 const { entregaModel } = require("../models/entregaModel");
 const { pedidoModel } = require("../models/pedidoModel");
-
+const {entregaController} = {sa};
 
 
 
@@ -29,7 +29,7 @@ const { pedidoModel } = require("../models/pedidoModel");
  */function calcularValoresEntrega(pedido) {
 
   const valorDistancia = pedido.distancia_km * pedido.valor_base_km;
-  const valorPeso      = pedido.peso_kg      * pedido.valor_base_kg;
+  const valorPeso = pedido.peso_kg * pedido.valor_base_kg;
 
   let valorBase = valorDistancia + valorPeso;
 
@@ -52,58 +52,84 @@ const { pedidoModel } = require("../models/pedidoModel");
 
 
 
-    /**
- * @description Controlador responsável por calcular o valor final de uma entrega
- * com base no ID do pedido enviado pelo cliente.
- *
- * @param {number} req.body.pedidoId - ID do pedido cuja entrega será calculada.
- *
- * @route POST /calcularEntrega
- *
- * @returns {JSON} Retorna mensagem de sucesso, os valores calculados,
- *                 e o ID do pedido; ou uma mensagem de erro.
- */ 
+  async function salvarEntrega(req, res) {
+  try {
+    const {
+      pedido_id,
+      valor_distancia,
+      valor_peso,
+      acrescimo,
+      desconto,
+      taxa_extra,
+      valor_final
+    } = req.body;
+
+    const idEntrega = await entregaModel.inserirDadosEntrega({
+      pedido_id,
+      valor_distancia,
+      valor_peso,
+      acrescimo,
+      desconto,
+      taxa_extra,
+      valor_final,
+      status: "calculado"
+    });
+
+    res.status(201).json({
+      mensagem: "Entrega registrada com sucesso!",
+      entrega_id: idEntrega
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: "Erro ao registrar entrega." });
+  }
+};
+
+
+/**
+* @description Controlador responsável por calcular o valor final de uma entrega
+* com base no ID do pedido enviado pelo cliente.
+*
+* @param {number} req.body.pedidoId - ID do pedido cuja entrega será calculada.
+*
+* @route POST /calcularEntrega
+*
+* @returns {JSON} Retorna mensagem de sucesso, os valores calculados,
+*                 e o ID do pedido; ou uma mensagem de erro.
+*/
 module.exports = {
-   adcionarEntrega: async (req, res) => {
+  calcularEntrega: async (req, res) => {
     try {
       const { pedidoId } = req.body;
 
-      
-      const pedido = await pedidoModel.buscarPedidoPeloId(pedidoId);
+
+      const pedido = await pedidoModel.buscarPedidoPorId(pedidoId);
       if (!pedido) return res.status(404).json({ erro: "Pedido não encontrado :/ " });
 
-      
+
       const valores = calcularValoresEntrega(pedido);
 
-      
-       const dadosEntrega = {
-      valorDistancia: valores.valorDistancia,
-      valorPeso: valores.valorPeso,
-      acrescimo: valores.acrescimo,
-      desconto: valores.desconto,
-      taxaExtra: valores.taxaExtra,
-      valorFinal: valores.valorFinal,
-      idPedido: pedidoId
-    };
 
-    
-    const resultadoInsercao = await entregaModel.inserirEntrega(dadosEntrega);
+      await entregaModel.atualizarEntrega(pedidoId, valores);
 
-    
-    await entregaModel.atualizarEntrega(pedidoId, valores);
+      res.json({
+        mensagem: "Entrega calculada com sucesso! :) ",
+        pedidoId,
+        valores
+      });
 
-    return res.json({
-      mensagem: "Entrega calculada e salva com sucesso! :)",
-      pedidoId,
-      valores,
-      entregaInserida: resultadoInsercao
-    });
-
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ erro: "Erro ao calcular a entrega :(" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ erro: "Erro ao calcular a entrega :( " });
+    }
   }
-}
-
-
 };
+
+
+module.exports = { entregaController };
+
+
+
+
+

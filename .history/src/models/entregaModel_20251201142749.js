@@ -55,9 +55,9 @@ const entregaModel = {
 
     const [result] = await pool.query(sql, values);
     return result;
-  },
+  }
   
-  inserirEntrega: async (dados) => {
+const inserirEntrega = async (dados) => {
     const sql = `
     INSERT INTO entregas (
       valor_distancia, valor_peso, acrescimo, desconto, taxa_extra, valor_final, status_entrega, id_pedido
@@ -77,7 +77,7 @@ const entregaModel = {
 
     const [result] = await pool.query(sql, values);
     return result;
-  }
+  };
 
 };
 

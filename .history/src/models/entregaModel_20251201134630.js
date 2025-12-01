@@ -36,44 +36,14 @@ const entregaModel = {
  * @route PUT /entrega
  *
  * @returns {Promise<Object>} Resultado da operação no banco (linhas afetadas).
- */  atualizarEntrega: async (pedidoId, dados) => {
+ */  atualizarEntrega: async (valorDistancia, valorPeso, acrescimo, desconto, taxaExtra, valorFinal, "calculado", pedidoId) => {
     const sql = `
       UPDATE entregas 
       SET valor_distancia = ?, valor_peso = ?, acrescimo = ?, desconto = ?, taxa_extra = ?, valor_final = ?, status_entrega = ?
-      WHERE id_pedido = ?`;
-
-    const values = [
-      dados.valorDistancia,
-      dados.valorPeso,
-      dados.acrescimo,
-      dados.desconto,
-      dados.taxaExtra,
-      dados.valorFinal,
-      "calculado",
-      pedidoId
-    ];
-
-    const [result] = await pool.query(sql, values);
-    return result;
-  },
-  
-  inserirEntrega: async (dados) => {
-    const sql = `
-    INSERT INTO entregas (
-      valor_distancia, valor_peso, acrescimo, desconto, taxa_extra, valor_final, status_entrega, id_pedido
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-  `;
-
-    const values = [
-      dados.valorDistancia,
-      dados.valorPeso,
-      dados.acrescimo,
-      dados.desconto,
-      dados.taxaExtra,
-      dados.valorFinal,
-      "calculado",
-      dados.idPedido
-    ];
+      WHERE id_pedido = ?
+    `;
+    
+    const values = [valorDistancia, valorPeso, acrescimo, desconto, taxaExtra, valorFinal, "calculado", pedidoId];
 
     const [result] = await pool.query(sql, values);
     return result;
@@ -82,6 +52,3 @@ const entregaModel = {
 };
 
 module.exports = { entregaModel };
-
-
-

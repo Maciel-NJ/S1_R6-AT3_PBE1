@@ -77,7 +77,7 @@ const entregaModel = {
 
     const [result] = await pool.query(sql, values);
     return result;
-  }
+  };
 
 };
 

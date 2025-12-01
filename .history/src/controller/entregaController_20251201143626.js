@@ -86,10 +86,10 @@ module.exports = {
       idPedido: pedidoId
     };
 
-    
+    // Chamada do model
     const resultadoInsercao = await entregaModel.inserirEntrega(dadosEntrega);
 
-    
+    // Caso queira atualizar outra tabela ou status
     await entregaModel.atualizarEntrega(pedidoId, valores);
 
     return res.json({

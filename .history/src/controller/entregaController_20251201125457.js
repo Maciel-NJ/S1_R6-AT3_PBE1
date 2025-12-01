@@ -64,46 +64,68 @@ const { pedidoModel } = require("../models/pedidoModel");
  *                 e o ID do pedido; ou uma mensagem de erro.
  */ 
 module.exports = {
-   adcionarEntrega: async (req, res) => {
+   calcularEntrega: async (req, res) => {
     try {
       const { pedidoId } = req.body;
 
       
-      const pedido = await pedidoModel.buscarPedidoPeloId(pedidoId);
+      const pedido = await pedidoModel.buscarPedidoPorId(pedidoId);
       if (!pedido) return res.status(404).json({ erro: "Pedido não encontrado :/ " });
 
       
       const valores = calcularValoresEntrega(pedido);
 
       
-       const dadosEntrega = {
-      valorDistancia: valores.valorDistancia,
-      valorPeso: valores.valorPeso,
-      acrescimo: valores.acrescimo,
-      desconto: valores.desconto,
-      taxaExtra: valores.taxaExtra,
-      valorFinal: valores.valorFinal,
-      idPedido: pedidoId
-    };
+      await entregaModel.atualizarEntrega(pedidoId, valores);
 
-    
-    const resultadoInsercao = await entregaModel.inserirEntrega(dadosEntrega);
+      res.json({
+        mensagem: "Entrega calculada com sucesso! :) ",
+        pedidoId,
+        valores
+      });
 
-    
-    await entregaModel.atualizarEntrega(pedidoId, valores);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ erro: "Erro ao calcular a entrega :( " });
+    }
+  },
 
-    return res.json({
-      mensagem: "Entrega calculada e salva com sucesso! :)",
-      pedidoId,
-      valores,
-      entregaInserida: resultadoInsercao
-    });
 
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ erro: "Erro ao calcular a entrega :(" });
-  }
+  async function salvarEntrega(req, res) {
+    try {
+        const {
+            pedido_id,
+            valor_distancia,
+            valor_peso,
+            acrescimo,
+            desconto,
+            taxa_extra,
+            valor_final
+        } = req.body;
+
+        const idEntrega = await entregaModel.inserirEntrega({
+            pedido_id,
+            valor_distancia,
+            valor_peso,
+            acrescimo,
+            desconto,
+            taxa_extra,
+            valor_final,
+            status: "calculado"
+        });
+
+        res.status(201).json({
+            mensagem: "Entrega registrada com sucesso!",
+            entrega_id: idEntrega
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao registrar entrega." });
+    }
+}
 }
 
-
 };
+
+

@@ -42,7 +42,7 @@ const entregaModel = {
       SET valor_distancia = ?, valor_peso = ?, acrescimo = ?, desconto = ?, taxa_extra = ?, valor_final = ?, status_entrega = ?
       WHERE id_pedido = ?`;
 
-    const values = [
+     const values = [
       dados.valorDistancia,
       dados.valorPeso,
       dados.acrescimo,
@@ -55,29 +55,8 @@ const entregaModel = {
 
     const [result] = await pool.query(sql, values);
     return result;
-  },
-  
-  inserirEntrega: async (dados) => {
-    const sql = `
-    INSERT INTO entregas (
-      valor_distancia, valor_peso, acrescimo, desconto, taxa_extra, valor_final, status_entrega, id_pedido
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-  `;
-
-    const values = [
-      dados.valorDistancia,
-      dados.valorPeso,
-      dados.acrescimo,
-      dados.desconto,
-      dados.taxaExtra,
-      dados.valorFinal,
-      "calculado",
-      dados.idPedido
-    ];
-
-    const [result] = await pool.query(sql, values);
-    return result;
   }
+  
 
 };
 
@@ -85,3 +64,24 @@ module.exports = { entregaModel };
 
 
 
+
+const inserirEntrega = async (dados) => {
+  const sql = `
+    INSERT INTO entregas (
+      valor_distancia, valor_peso, acrescimo, desconto, taxa_extra, valor_final, status_entrega, id_pedido
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [
+    dados.valorDistancia,
+    dados.valorPeso,
+    dados.acrescimo,
+    dados.desconto,
+    dados.taxaExtra,
+    dados.valorFinal,
+    "calculado",   
+    dados.idPedido  // supondo que idPedido venha dentro de dados
+  ];
+
+  const [result] = await pool.query(sql, values);
+  return result;
